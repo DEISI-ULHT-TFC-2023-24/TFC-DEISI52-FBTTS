@@ -1,0 +1,37 @@
+[
+    {
+        "id": 6,
+        "name": "Brazil",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+    },
+    {
+        "id": 14,
+        "name": "England",
+        "flag": "https://media.api-sports.io/flags/gb.svg"
+    },
+    {
+        "id": 17,
+        "name": "France",
+        "flag": "https://media.api-sports.io/flags/fr.svg"
+    },
+    {
+        "id": 18,
+        "name": "Germany",
+        "flag": "https://media.api-sports.io/flags/de.svg"
+    },
+    {
+        "id": 25,
+        "name": "Italy",
+        "flag": "https://media.api-sports.io/flags/it.svg"
+    },
+    {
+        "id": 31,
+        "name": "Portugal",
+        "flag": "https://media.api-sports.io/flags/pt.svg"
+    },
+    {
+        "id": 35,
+        "name": "Spain",
+        "flag": "https://media.api-sports.io/flags/es.svg"
+    }
+]

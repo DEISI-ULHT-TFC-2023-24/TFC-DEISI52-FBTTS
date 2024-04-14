@@ -1,0 +1,89 @@
+[
+    {
+        "id": 8,
+        "descr": "Both Teams Score",
+        "possibleOperator": "no, yes",
+        "possibleValue": null,
+        "operatorMandatory": true
+    },
+    {
+        "id": 34,
+        "descr": "Both Teams Score - First Half",
+        "possibleOperator": "no, yes",
+        "possibleValue": null,
+        "valueMandatory": false,
+        "operatorMandatory": true
+    },
+    {
+        "id": 35,
+        "descr": "Both Teams Score - Second Half",
+        "possibleOperator": "no, yes",
+        "possibleValue": null,
+        "valueMandatory": false,
+        "operatorMandatory": true
+    },
+    {
+        "id": 45,
+        "descr": "Corners Over/Under",
+        "possibleOperator": "under, over",
+        "possibleValue": "7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5",
+        "valueMandatory": true,
+        "operatorMandatory": true
+    },
+    {
+        "id": 13,
+        "descr": "First Half Winner",
+        "possibleOperator": null,
+        "possibleValue": "home, away, draw",
+        "valueMandatory": true,
+        "operatorMandatory": false
+    },
+    {
+        "id": 5,
+        "descr": "Goals Over/Under",
+        "possibleOperator": "under, over",
+        "possibleValue": "0.5, 1.5, 2.5, 3.5, 4.5",
+        "valueMandatory": true,
+        "operatorMandatory": true
+    },
+    {
+        "id": 6,
+        "descr": "Goals Over/Under First Half",
+        "possibleOperator": "under, over",
+        "possibleValue": "0.5, 1.5, 2.5",
+        "valueMandatory": true,
+        "operatorMandatory": true
+    },
+    {
+        "id": 26,
+        "descr": "Goals Over/Under Second Half",
+        "possibleOperator": "under, over",
+        "possibleValue": "0.5, 1.5, 2.5",
+        "valueMandatory": true,
+        "operatorMandatory": true
+    },
+    {
+        "id": 2,
+        "descr": "Home/Away",
+        "possibleOperator": null,
+        "possibleValue": "home, away",
+        "valueMandatory": true,
+        "operatorMandatory": false
+    },
+    {
+        "id": 1,
+        "descr": "Match Winner",
+        "possibleOperator": null,
+        "possibleValue": "home, away, draw",
+        "valueMandatory": true,
+        "operatorMandatory": false
+    },
+    {
+        "id": 3,
+        "descr": "Second Half Winner",
+        "possibleOperator": null,
+        "possibleValue": "home, away, draw",
+        "valueMandatory": true,
+        "operatorMandatory": false
+    }
+]

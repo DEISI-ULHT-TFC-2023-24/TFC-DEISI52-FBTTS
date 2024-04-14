@@ -1,0 +1,86 @@
+[
+    {
+        "id": 6,
+        "name": "Serie A",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "countryId": 6
+    },
+    {
+        "id": 7,
+        "name": "Serie B",
+        "logo": "https://media.api-sports.io/football/leagues/72.png",
+        "countryId": 6
+    },
+    {
+        "id": 16,
+        "name": "Premier League",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "countryId": 14
+    },
+    {
+        "id": 17,
+        "name": "Championship",
+        "logo": "https://media.api-sports.io/football/leagues/40.png",
+        "countryId": 14
+    },
+    {
+        "id": 21,
+        "name": "Ligue 1",
+        "logo": "https://media.api-sports.io/football/leagues/61.png",
+        "countryId": 17
+    },
+    {
+        "id": 22,
+        "name": "Ligue 2",
+        "logo": "https://media.api-sports.io/football/leagues/62.png",
+        "countryId": 17
+    },
+    {
+        "id": 23,
+        "name": "Bundesliga 1",
+        "logo": "https://media.api-sports.io/football/leagues/78.png",
+        "countryId": 18
+    },
+    {
+        "id": 24,
+        "name": "Bundesliga 2",
+        "logo": "https://media.api-sports.io/football/leagues/79.png",
+        "countryId": 18
+    },
+    {
+        "id": 26,
+        "name": "Seria A",
+        "logo": "https://media.api-sports.io/football/leagues/135.png",
+        "countryId": 25
+    },
+    {
+        "id": 27,
+        "name": "Seria B",
+        "logo": "https://media.api-sports.io/football/leagues/136.png",
+        "countryId": 25
+    },
+    {
+        "id": 31,
+        "name": "Primeira Liga",
+        "logo": "https://media.api-sports.io/football/leagues/94.png",
+        "countryId": 31
+    },
+    {
+        "id": 32,
+        "name": "Liga de Honra",
+        "logo": "https://fbtts.pt/images/leagues/95.png",
+        "countryId": 31
+    },
+    {
+        "id": 34,
+        "name": "Primera Division",
+        "logo": "https://media.api-sports.io/football/leagues/140.png",
+        "countryId": 35
+    },
+    {
+        "id": 35,
+        "name": "Segunda Division",
+        "logo": "https://media.api-sports.io/football/leagues/141.png",
+        "countryId": 35
+    }
+]
