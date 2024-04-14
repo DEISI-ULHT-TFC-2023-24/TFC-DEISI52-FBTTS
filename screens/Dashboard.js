@@ -29,7 +29,7 @@ const Dashboard = () => {
                     const odd = parseFloat(match.odd);
                     return odd ? total + odd : total;
                 }, 0) / totalJogos
-//commit
+//commit main
 
                 const strategyData = {
                     tituloEstrategia: "Both teams to score",
