@@ -28,10 +28,10 @@ const Dashboard = () => {
                 const oddMedia = matches.reduce((total, match) => {
                     const odd = parseFloat(match.odd);
                     return odd ? total + odd : total;
-                }, 0) / totalJogos;
+                }, 0) / totalJogos
 
 
-                const strategyData = { //feito
+                const strategyData = {
                     tituloEstrategia: "Both teams to score",
                     nrJogos: totalJogos,
                     nrApostas: totalApostas,
