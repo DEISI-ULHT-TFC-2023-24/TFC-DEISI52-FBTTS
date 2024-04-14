@@ -31,7 +31,7 @@ const Dashboard = () => {
                 }, 0) / totalJogos;
 
 
-                const strategyData = {
+                const strategyData = { //feito
                     tituloEstrategia: "Both teams to score",
                     nrJogos: totalJogos,
                     nrApostas: totalApostas,
