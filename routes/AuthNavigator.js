@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../screens/Login';
-import DashboardStack from './dashboardStack';
-import CustomDrawerContent from './CustomDrawerContent'; // Import your CustomDrawerContent component
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Login from '../screens/Login';
+import CustomDrawerContent from './CustomDrawerContent';
+import DashboardStack from './dashboardStack';
 import LigasStack from "./ligasStack";
 import SuporteStack from "./suporteStack";
 import JogosDasLigasStack from "./jogosDasLigasStack";
@@ -20,17 +20,25 @@ const AuthNavigator = () => {
     );
 };
 
-const DashboardDrawer = () => {
+const DashboardDrawer = ({ route }) => {
     return (
         <Drawer.Navigator
             initialRouteName="DashboardStack"
             drawerContent={(props) => <CustomDrawerContent navigation={props.navigation} />}
             screenOptions={{ headerShown: false }}
         >
-            <Drawer.Screen name="DashboardStack" component={DashboardStack} options={{ title: 'Dashboard' }} />
-            <Drawer.Screen name="LigasStack" component={LigasStack} options={{ title: 'Ligas' }} />
-            <Drawer.Screen name="SuporteStack" component={SuporteStack} options={{ title: 'Suporte' }} />
-            <Drawer.Screen name="JogosStack" component={JogosDasLigasStack} options={{ title: 'Jogos das Ligas' }} />
+            <Drawer.Screen name="DashboardStack" options={{ title: 'Dashboard' }}>
+                {(props) => <DashboardStack {...props} route={route} />}
+            </Drawer.Screen>
+            <Drawer.Screen name="LigasStack" options={{ title: 'Ligas' }}>
+                {(props) => <LigasStack {...props} route={route} />}
+            </Drawer.Screen>
+            <Drawer.Screen name="SuporteStack" options={{ title: 'Suporte' }}>
+                {(props) => <SuporteStack {...props} route={route} />}
+            </Drawer.Screen>
+            <Drawer.Screen name="JogosStack" options={{ title: 'Jogos das Ligas' }}>
+                {(props) => <JogosDasLigasStack {...props} route={route} />}
+            </Drawer.Screen>
         </Drawer.Navigator>
     );
 };

@@ -1,16 +1,17 @@
-import React from 'react';
-import { StyleSheet, View, Dimensions, Image } from 'react-native';
+import React, {useContext} from 'react';
+import { StyleSheet, View, Dimensions, Image, Linking } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import { logoutUser } from '../services/auth';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
+import CustomDrawerHeader from "./CustomDrawerHeader";
+import DrawerItemWithBullet from "./DrawerItemWithBullet";
+import {AuthContext} from "../context/AuthContext";
 
-const CustomDrawerContent = ({ navigation }) => {
-    const handleLogout = async () => {
-        const loggedOut = await logoutUser();
-        if (loggedOut) {
-            navigation.navigate('Login');
-        }
+const CustomDrawerContent = ({ navigation, email }) => {
+    const {logout} = useContext(AuthContext)
+
+    const handleOpenWebsite = () => {
+        Linking.openURL('https://www.fbtts.pt');
     };
 
     return (
@@ -24,15 +25,16 @@ const CustomDrawerContent = ({ navigation }) => {
             <DrawerContentScrollView scrollEnabled={false}>
                 <View>
                     <Image source={require('../assets/fbttsLogo.png')} style={styles.logo} />
-                    <DrawerItem label="Dashboard" onPress={() => navigation.navigate('DashboardStack')} labelStyle={styles.drawerItemText} />
-                    <DrawerItem label="Ligas" onPress={() => navigation.navigate('LigasStack')} labelStyle={styles.drawerItemText} />
-                    <DrawerItem label="Suporte" onPress={() => navigation.navigate('SuporteStack')} labelStyle={styles.drawerItemText} />
-                    <DrawerItem label="Jogos das Ligas" onPress={() => navigation.navigate('JogosStack')} labelStyle={styles.drawerItemText} />
-                    <DrawerItem label="Logout" onPress={handleLogout} labelStyle={styles.drawerItemText} />
+                    <CustomDrawerHeader userName={email} />
+                    <DrawerItemWithBullet label="Dashboard" onPress={() => navigation.navigate('DashboardStack')} labelStyle={styles.drawerItemText} />
+                    <DrawerItemWithBullet label="Ligas" onPress={() => navigation.navigate('LigasStack')} labelStyle={styles.drawerItemText} />
+                    <DrawerItemWithBullet label="Suporte" onPress={() => navigation.navigate('SuporteStack')} labelStyle={styles.drawerItemText} />
+                    <DrawerItemWithBullet label="Jogos" onPress={() => navigation.navigate('JogosStack')} labelStyle={styles.drawerItemText} />
+                    <DrawerItemWithBullet label="Ajuda" onPress={handleOpenWebsite} labelStyle={styles.drawerItemText} />
+                    <DrawerItemWithBullet label="Logout" onPress={() => {logout()}} labelStyle={styles.drawerItemText} />
                     <View style={styles.filler} />
                 </View>
             </DrawerContentScrollView>
-            {/* Define a cor da status bar */}
             <StatusBar style="light" />
         </View>
     );
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     drawerItemText: {
         color: '#ffffff',
         fontSize: 16,
+        fontWeight: 'bold',
         paddingHorizontal: 30,
     },
     filler: {

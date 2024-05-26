@@ -1,64 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, FlatList, SafeAreaView, View, StyleSheet, TouchableHighlight } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from "../context/AuthContext";
 import JogosDeHojeButton from "../components/Geral/jogosDeHojeButton";
+import { BASE_URL2 } from "../config";
 
 const Dashboard = () => {
+    const { userToken, userInfo } = useContext(AuthContext); // Obtendo userToken e userInfo do contexto
     const [data, setData] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-        const loadJsonData = async () => {
+        console.log('User token:', userInfo.token);
+        console.log('User email:', userInfo.email);
+        const fetchUserData = async () => {
             try {
-                const jsonData = require('../JSON/matches_strat.json');
+                if (!userInfo.token || !userInfo) {
+                    console.error('Token de usuário ou userInfo não disponíveis');
+                    return;
+                }
 
-                const matches = jsonData.response.matches;
+                console.log('Fetching data from:', `${BASE_URL2}methods`);
+                const response = await fetch(`${BASE_URL2}methods`, {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${userInfo.token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-                const totalJogos = matches.length;
-                const totalApostas = matches.reduce((total, match) => {
-                    const count = parseInt(match.count);
-                    return count ? total + count : total;
-                }, 25);
+                console.log('Response status:', response.status);
 
-                const lucroTotal = matches.reduce((total, match) => {
-                    const profit = parseInt(match.profit);
-                    return profit ? total + profit : total;
-                }, 37);
+                if (response.status === 403) {
+                    console.error('Acesso negado: token inválido ou insuficiente.');
+                    return;
+                }
 
-                const oddMedia = matches.reduce((total, match) => {
-                    const odd = parseFloat(match.odd);
-                    return odd ? total + odd : total;
-                }, 0) / totalJogos
-//commit main
+                const responseText = await response.text();
+                console.log('Response text:', responseText);
 
-                const strategyData = {
-                    tituloEstrategia: "Both teams to score",
-                    nrJogos: totalJogos,
-                    nrApostas: totalApostas,
-                    lucroObtido: lucroTotal,
-                    oddMedia: oddMedia.toFixed(2),
-                    nrVitorias: 13,
-                    jogos: jsonData.response.matches.map(match => ({
-                        id: match.id,
-                        country: match.country,
-                        flag: match.flag,
-                        league: match.league,
-                        match: `${match.home} vs ${match.away}`,
-                    }))
-                };
+                const userMethods = JSON.parse(responseText);
+                console.log('User methods:', userMethods);
 
-                setData([strategyData]);
+                if (Array.isArray(userMethods)) {
+                    const formattedData = userMethods.map(method => ({
+                        tituloEstrategia: method.title,
+                        nrJogos: method.total,
+                        lucroObtido: method.profit,
+                        oddMedia: method.odd.toFixed(2),
+                        nrVitorias: method.wins,
+                    }));
+
+                    setData(formattedData);
+                } else {
+                    console.error('Resposta da API não contém dados válidos');
+                }
             } catch (error) {
                 console.error('Erro ao carregar os dados:', error);
             }
         };
 
-        loadJsonData();
-    }, []);
-
+        if (userInfo.token) {
+            fetchUserData();
+        }
+    }, [userInfo]); // Adicionando userInfo como dependência do useEffect
 
     const Item = ({ item }) => {
-        const { tituloEstrategia, nrJogos, nrApostas, lucroObtido, oddMedia } = item;
+        const { tituloEstrategia, nrJogos, nrVitorias, lucroObtido, oddMedia } = item;
 
         return (
             <TouchableHighlight
@@ -74,7 +82,7 @@ const Dashboard = () => {
                     <Text style={styles.titulo}>{tituloEstrategia}</Text>
                     <View style={styles.dataContainer}>
                         <Text>Jogos: {nrJogos}</Text>
-                        <Text>Apostas: {nrApostas}</Text>
+                        <Text>Vitorias: {nrVitorias}</Text>
                     </View>
                     <View style={styles.dataContainer}>
                         <Text>Lucro: {lucroObtido}€</Text>

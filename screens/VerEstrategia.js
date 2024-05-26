@@ -1,20 +1,37 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import JogosDeHojeButton from "../components/Geral/jogosDeHojeButton";
+import jogosData from "../JSON/matches.json";
 
 const VerEstrategia = ({ route }) => {
     const navigation = useNavigation();
     const { strategyData } = route.params;
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [jogosVisiveis, setJogosVisiveis] = useState([]);
     const [ligas, setLigas] = useState([]);
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: strategyData.tituloEstrategia,
+        });
+    }, [navigation, strategyData]);
+
     useEffect(() => {
-        extractLeagues(strategyData.jogos);
-        loadMoreGames();
-    }, [strategyData]);
+        fetchMatches();
+    }, []);
+
+    const fetchMatches = () => {
+        try {
+            setJogosVisiveis(jogosData);
+            extractLeagues(jogosData);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching matches:', error);
+            setLoading(false);
+        }
+    };
 
     const extractLeagues = (matches) => {
         const newLeagues = matches.map(match => match.league);
@@ -74,36 +91,22 @@ const VerEstrategia = ({ route }) => {
         );
     };
 
-    const loadMoreGames = useCallback(async () => {
-        if (loading) return;
 
-        setLoading(true);
-        try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            const moreGames = strategyData.jogos.slice(jogosVisiveis.length, jogosVisiveis.length + 20);
-            setJogosVisiveis(prevGames => [...prevGames, ...moreGames]);
-        } catch (error) {
-            console.error('Error loading more games:', error);
-        } finally {
-            setLoading(false);
-        }
-    }, [loading, jogosVisiveis, strategyData]);
+    if (loading) {
+        return <ActivityIndicator size="large" color="#0000ff" />;
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.estrategiaInfo}>
                 <Text style={styles.infoText}><Text style={styles.boldText}>Lucro:</Text> {strategyData.lucroObtido}€</Text>
-                <Text style={styles.infoText}><Text style={styles.boldText}>Jogos/Apostas:</Text> {strategyData.nrApostas}/{strategyData.nrVitorias}</Text>
+                <Text style={styles.infoText}><Text style={styles.boldText}>Jogos/Apostas:</Text> {strategyData.nrJogos}/{strategyData.nrVitorias}</Text>
                 <Text style={styles.infoText}><Text style={styles.boldText}>Ligas:</Text> {ligas.join(', ')}</Text>
             </View>
             <FlatList
                 data={jogosVisiveis}
                 renderItem={renderJogos}
                 keyExtractor={(item) => item.id.toString()}
-                onEndReached={loadMoreGames}
-                onEndReachedThreshold={0.1}
-                ListFooterComponent={loading && <Text style={styles.loadingText}>Loading...</Text>}
             />
             <View style={styles.buttonContainer}>
                 <JogosDeHojeButton />

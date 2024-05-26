@@ -4,7 +4,6 @@ import GameInfo from '../components/Detalhes do Jogo/InfoJogo';
 import TimelineJogo from "../components/Detalhes do Jogo/timelineJogo";
 import Estatisticas from "../components/Detalhes do Jogo/Estatisticas";
 import ConfrontosDiretos from "../components/Detalhes do Jogo/H2h";
-import EstatisticasGolos from "../components/Detalhes do Jogo/EstatisticasGolos";
 import EstatisticasGolosListaJogos from "../components/Detalhes do Jogo/EstatisticasGolosListaJogos";
 
 const JogoDetalhe = ({ route }) => {

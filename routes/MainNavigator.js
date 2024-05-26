@@ -1,12 +1,11 @@
 import React from 'react';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import CustomDrawerContent from './CustomDrawerContent'; // Import your CustomDrawerContent component
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import CustomDrawerContent from './CustomDrawerContent';
 import DashboardStack from "./dashboardStack";
 import LigasStack from "./ligasStack";
 import SuporteStack from "./suporteStack";
 import JogosDasLigasStack from "./jogosDasLigasStack";
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
-import { logoutUser } from "../services/auth";
+import { useNavigation } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 

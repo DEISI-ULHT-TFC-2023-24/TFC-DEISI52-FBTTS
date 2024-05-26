@@ -92,13 +92,13 @@ export default class TimelineJogo extends React.Component {
         // Constrói a descrição usando o nome da equipe
         switch (event.image) {
             case 'goal':
-                return `${teamName}: Golo marcado`;
+                return `${teamName}`;
             case 'yellow':
-                return `${teamName}: Cartão amarelo dado`;
+                return `${teamName}`;
             case 'red':
-                return `${teamName}: Cartão vermelho dado`;
+                return `${teamName}`;
             default:
-                return `${teamName}: Descrição do evento`;
+                return `${teamName}`;
         }
     }
 

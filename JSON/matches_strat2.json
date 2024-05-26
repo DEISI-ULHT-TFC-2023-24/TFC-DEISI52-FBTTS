@@ -1,0 +1,60 @@
+{
+  "response": {
+    "all": 0,
+    "total": 118,
+    "wins": 0,
+    "rate": 0,
+    "oddMin": 0,
+    "count": 0,
+    "profit": 400,
+    "roi": 3.8,
+    "odd": 2.08,
+    "oddProfit": 0,
+    "matches": [
+      {
+        "id": 50865,
+        "flag": "https://media.api-sports.io/flags/gb.svg",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/40.png",
+        "league": "Premier League",
+        "season": "2023/2024",
+        "date": "2023-12-09",
+        "time": "16:00",
+        "status": "NF",
+        "round": "20",
+        "match": "Bournemouth vs Crystal Palace",
+        "home": "Bournemouth",
+        "away": "Crystal Palace",
+        "ht": null,
+        "ft": null,
+        "odd": null,
+        "oddFair": null,
+        "winlossignore": -2,
+        "follow": false
+      },
+      {
+        "id": 47418,
+        "flag": "https://media.api-sports.io/flags/gb.svg",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/40.png",
+        "league": "Championship",
+        "season": "2023/2024",
+        "date": "2023-12-09",
+        "time": "16:00",
+        "status": "NF",
+        "round": "20",
+        "match": "Norwich vs Preston",
+        "home": "Norwich",
+        "away": "Preston",
+        "ht": null,
+        "ft": null,
+        "odd": null,
+        "oddFair": null,
+        "winlossignore": -2,
+        "follow": false
+      }
+    ],
+    "live": true
+  },
+  "messages": []
+}

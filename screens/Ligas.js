@@ -1,44 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Text } from 'react-native-paper';
+import { AuthContext } from "../context/AuthContext";
+import { BASE_URL2 } from "../config";
 
 const LigasList = () => {
+    const { userInfo } = useContext(AuthContext);
     const [leaguesData, setLeaguesData] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-        const loadJsonData = async () => {
+        const fetchLeaguesData = async () => {
             try {
-                const jsonData = require('../JSON/leagues.json');
-
-                if (jsonData) {
-                    const formattedData = jsonData.map(item => ({
-                        id: item.id,
-                        liga: item.name,
-                        logo: item.logo
-                    }));
-
-                    setLeaguesData(formattedData);
-                } else {
-                    console.error('O arquivo JSON não foi carregado corretamente.');
+                if (!userInfo.token) {
+                    console.error('Token de usuário não disponível');
+                    return;
                 }
+
+                console.log('Fetching data from:', `${BASE_URL2}leagues`);
+                const response = await fetch(`${BASE_URL2}leagues`, {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${userInfo.token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar os dados das ligas');
+                }
+
+                const jsonData = await response.json();
+                setLeaguesData(jsonData);
             } catch (error) {
-                console.error('Erro ao carregar os dados:', error);
+                console.error('Erro ao carregar os dados das ligas:', error);
             }
         };
 
-        loadJsonData();
-    }, []);
+        fetchLeaguesData();
+    }, [userInfo.token]);
 
     const handleImagePress = (ligaTitle) => {
         navigation.navigate('LigaDetalhe', { league: ligaTitle });
     };
+
     const renderLeagueItem = ({ item, index }) => (
         <View style={[styles.leagueItem, index % 2 === 1 && styles.evenItem]}>
-            <Text style={styles.countryName}>{item.liga}</Text>
+            <Text style={styles.countryName}>{item.name}</Text>
             <View style={styles.leagueContainer}>
-                <TouchableOpacity onPress={() => handleImagePress(item.liga)}>
+                <TouchableOpacity onPress={() => handleImagePress(item.name)}>
                     {item.logo && (
                         <Image
                             source={{ uri: item.logo }}

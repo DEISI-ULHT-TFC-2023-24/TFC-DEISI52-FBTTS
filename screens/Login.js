@@ -1,30 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import { loginUser } from "../services/auth";
+import {useContext} from "react";
+import {AuthContext} from "../context/AuthContext";
 
 const ScreenHeight = Dimensions.get("window").height;
 
 const LoginScreen = () => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
     const navigation = useNavigation();
+    const {login} = useContext(AuthContext); // Usando o contexto AuthContext
 
-    const handleLogin = async () => {
-        try {
-            const token = await loginUser(email, password);
-            if (token) {
-                console.log('Login successful. Navigating to Dashboard with userName:', email);
-                navigation.navigate('Dashboard', { userName: email });
-            } else {
-                alert('Authentication failed. Please check your credentials.');
-            }
-        } catch (error) {
-            alert('Error during login. Please try again.');
-            console.error('Login error:', error);
-        }
-    };
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            setEmail('');
+            setPassword('');
+        });
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -32,7 +28,7 @@ const LoginScreen = () => {
                 <LinearGradient
                     colors={['#6dce83', '#0373cc']}
                     style={styles.gradient}
-                    start={{ x: 0, y: 1 }}
+                    start={{ x: 1, y: 0 }}
                     end={{ x: 0, y: 0 }}
                 >
                     <View style={styles.imageContainer}>
@@ -46,20 +42,21 @@ const LoginScreen = () => {
                 <View style={styles.contentContainer}>
                     <Text style={styles.title}>Olá! Bem-vindo, bora começar.</Text>
                     <Text style={styles.subtitle}>Faz login para continuar.</Text>
-
                     <View style={styles.form}>
                         <TextInput
                             style={styles.input}
                             placeholder="Email"
+                            value={email}
                             onChangeText={(text) => setEmail(text)}
                         />
                         <TextInput
                             style={styles.input}
                             placeholder="Password"
                             secureTextEntry
+                            value={password}
                             onChangeText={(text) => setPassword(text)}
                         />
-                        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                        <TouchableOpacity style={styles.button} onPress={() => {login(email, password)}}>
                             <Text style={{ color: '#ffffff', fontWeight: 'bold' }}>Autenticar</Text>
                         </TouchableOpacity>
                     </View>
@@ -98,6 +95,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     contentContainer: {
+        width: 364,
         paddingHorizontal: 20,
         paddingTop: ScreenHeight * 0.3,
         paddingBottom: 20,
@@ -112,11 +110,10 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     form: {
-        marginTop: 20,
         alignItems: 'center',
     },
     input: {
-        width: 300,
+        width: 325,
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
