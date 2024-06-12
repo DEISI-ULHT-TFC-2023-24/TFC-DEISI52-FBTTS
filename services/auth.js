@@ -24,13 +24,3 @@ export const getCliques = async () => {
         return null;
     }
 };
-
-export const getUserData = async () => {
-    try {
-        const userData = await AsyncStorage.getItem('userData');
-        return userData ? JSON.parse(userData) : null;
-    } catch (error) {
-        console.error('Error getting user data:', error);
-        return null;
-    }
-};

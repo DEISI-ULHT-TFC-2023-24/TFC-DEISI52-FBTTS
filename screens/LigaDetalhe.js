@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; // Importe useNavigation
+import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const LigaDetalhe = ({ route }) => {
     const [ano, setAno] = useState(2024);
@@ -16,7 +17,7 @@ const LigaDetalhe = ({ route }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: league ? league : 'Liga Detalhe', // Set the title to league name if available, otherwise set a default title
+            title: league ? league : 'Liga Detalhe',
         });
     }, [navigation, league]);
 
@@ -24,19 +25,18 @@ const LigaDetalhe = ({ route }) => {
         navigation.setOptions({ title: league });
     }, [navigation, league]);
 
-
     const incrementarAno = () => setAno(ano + 1);
     const decrementarAno = () => {
-        if (ano > 1){
+        if (ano > 1) {
             setAno(ano - 1);
         }
-    }
+    };
 
     const incrementarJornada = () => {
         if (jornada < 38) {
             setJornada(jornada + 1);
         }
-    }
+    };
     const decrementarJornada = () => {
         if (jornada > 1) {
             setJornada(jornada - 1);
@@ -86,21 +86,37 @@ const LigaDetalhe = ({ route }) => {
                 <Text style={styles.sectionTitle}>Classificação</Text>
                 <View style={styles.tableContainer}>
                     <DataTable>
-                        <DataTable.Header>
-                            <DataTable.Title>#</DataTable.Title>
-                            <DataTable.Title style={{ flex: 3 }}>Equipa</DataTable.Title>
-                            <DataTable.Title>Pontos</DataTable.Title>
-                            <DataTable.Title>Jogos</DataTable.Title>
-                            <DataTable.Title>G</DataTable.Title>
-                        </DataTable.Header>
+                        <View>
+                            <DataTable.Header>
+                                <DataTable.Title>#</DataTable.Title>
+                                <DataTable.Title style={{ flex: 3 }}>Equipa</DataTable.Title>
+                                <DataTable.Title>Pontos</DataTable.Title>
+                                <DataTable.Title>Jogos</DataTable.Title>
+                                <DataTable.Title>G</DataTable.Title>
+                            </DataTable.Header>
+                            <LinearGradient
+                                colors={['#6dce83', '#0373cc']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                                style={{ height: 2, width: '100%' }}
+                            />
+                        </View>
                         {classificacao.map((equipe, index) => (
-                            <DataTable.Row key={index}>
-                                <DataTable.Cell>{index + 1}</DataTable.Cell>
-                                <DataTable.Cell style={{ flex: 5 }}>{equipe.team}</DataTable.Cell>
-                                <DataTable.Cell>{equipe.points}</DataTable.Cell>
-                                <DataTable.Cell>{equipe.played}</DataTable.Cell>
-                                <DataTable.Cell>{equipe.scored}</DataTable.Cell>
-                            </DataTable.Row>
+                            <View key={index}>
+                                <DataTable.Row>
+                                    <DataTable.Cell>{index + 1}</DataTable.Cell>
+                                    <DataTable.Cell style={{ flex: 5 }}>{equipe.team}</DataTable.Cell>
+                                    <DataTable.Cell>{equipe.points}</DataTable.Cell>
+                                    <DataTable.Cell>{equipe.played}</DataTable.Cell>
+                                    <DataTable.Cell>{equipe.scored}</DataTable.Cell>
+                                </DataTable.Row>
+                                <LinearGradient
+                                    colors={['#6dce83', '#0373cc']}
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 0 }}
+                                    style={{ height: 2, width: '100%' }}
+                                />
+                            </View>
                         ))}
                     </DataTable>
                 </View>
@@ -111,7 +127,6 @@ const LigaDetalhe = ({ route }) => {
                 <Text style={styles.sectionTitle}>Jogos da Jornada</Text>
                 {jogosJornada.map((jogo, index) => (
                     <View key={index} style={{ marginBottom: 10 }}>
-                        {/* Verifica se o jogo já aconteceu e exibe o resultado */}
                         {jogo.ft !== null ? (
                             <Text>
                                 <Text style={{ fontWeight: 'bold' }}>
@@ -129,7 +144,6 @@ const LigaDetalhe = ({ route }) => {
             {/* Mercados e Resultados */}
             <View style={styles.section}>
                 <View style={styles.mercadosContainer}>
-                    {/* Percentagem dos Mercados */}
                     <View style={styles.mercadoSection}>
                         <Text style={styles.mercadoSectionTitle}>Percentagem dos Mercados</Text>
                         {mercadosResultados && (
@@ -143,7 +157,6 @@ const LigaDetalhe = ({ route }) => {
                         )}
                     </View>
 
-                    {/* Média de Golos */}
                     <View style={styles.mercadoSection}>
                         <Text style={styles.mercadoSectionTitle}>Média de Golos</Text>
                         {mercadosResultados && (
@@ -157,7 +170,6 @@ const LigaDetalhe = ({ route }) => {
                         )}
                     </View>
 
-                    {/* Percentagem de Resultados */}
                     <View style={styles.mercadoSection}>
                         <Text style={styles.mercadoSectionTitle}>Percentagem de Resultados</Text>
                         {mercadosResultados && (
@@ -172,8 +184,6 @@ const LigaDetalhe = ({ route }) => {
                     </View>
                 </View>
             </View>
-
-
         </ScrollView>
     );
 };
@@ -212,11 +222,11 @@ const styles = StyleSheet.create({
     },
     textoBotao: {
         color: '#2196F3',
-        fontWeight: 'bold'// Cor do texto do botão
+        fontWeight: 'bold'
     },
     textoAnoJornada: {
-        backgroundColor: '#DDE4EB', // Cor de fundo
-        padding: 8, // Espaçamento interno
+        backgroundColor: '#DDE4EB',
+        padding: 8,
     },
     mercadosContainer: {
         marginTop: 10,
@@ -231,6 +241,10 @@ const styles = StyleSheet.create({
     },
     mercadoItem: {
         marginBottom: 5,
+    },
+    separator: {
+        height: 2,
+        marginHorizontal: 16,
     },
 });
 

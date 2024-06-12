@@ -4,15 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from "../context/AuthContext";
 import JogosDeHojeButton from "../components/Geral/jogosDeHojeButton";
 import { BASE_URL2 } from "../config";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Dashboard = () => {
-    const { userToken, userInfo } = useContext(AuthContext); // Obtendo userToken e userInfo do contexto
+    const { userToken, userInfo } = useContext(AuthContext);
     const [data, setData] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-        console.log('User token:', userInfo.token);
-        console.log('User email:', userInfo.email);
         const fetchUserData = async () => {
             try {
                 if (!userInfo.token || !userInfo) {
@@ -20,7 +19,6 @@ const Dashboard = () => {
                     return;
                 }
 
-                console.log('Fetching data from:', `${BASE_URL2}methods`);
                 const response = await fetch(`${BASE_URL2}methods`, {
                     method: 'GET',
                     headers: {
@@ -29,18 +27,13 @@ const Dashboard = () => {
                     }
                 });
 
-                console.log('Response status:', response.status);
-
                 if (response.status === 403) {
                     console.error('Acesso negado: token inválido ou insuficiente.');
                     return;
                 }
 
                 const responseText = await response.text();
-                console.log('Response text:', responseText);
-
                 const userMethods = JSON.parse(responseText);
-                console.log('User methods:', userMethods);
 
                 if (Array.isArray(userMethods)) {
                     const formattedData = userMethods.map(method => ({
@@ -63,7 +56,7 @@ const Dashboard = () => {
         if (userInfo.token) {
             fetchUserData();
         }
-    }, [userInfo]); // Adicionando userInfo como dependência do useEffect
+    }, [userInfo]);
 
     const Item = ({ item }) => {
         const { tituloEstrategia, nrJogos, nrVitorias, lucroObtido, oddMedia } = item;
@@ -93,13 +86,23 @@ const Dashboard = () => {
         );
     };
 
+    const renderSeparator = () => (
+        <LinearGradient
+            colors={['#6dce83', '#0373cc']}
+            style={styles.separator}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+        />
+    );
+
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
                 data={data}
                 renderItem={({ item }) => <Item item={item} />}
                 keyExtractor={(item, index) => index.toString()}
-                ItemSeparatorComponent={() => <View style={{ backgroundColor: 'gray', height: 1 }} />}
+                ItemSeparatorComponent={renderSeparator}
+                ListFooterComponent={renderSeparator}
             />
             <View style={styles.buttonContainer}>
                 <JogosDeHojeButton />
@@ -131,6 +134,10 @@ const styles = StyleSheet.create({
         padding: 5,
         alignItems: 'center',
         marginTop: 20,
+    },
+    separator: {
+        height: 2,
+        width: '100%',
     },
 });
 

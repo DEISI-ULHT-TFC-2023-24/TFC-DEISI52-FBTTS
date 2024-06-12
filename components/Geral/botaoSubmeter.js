@@ -6,7 +6,7 @@ const SubmeterButton = () => (
     <Button
         mode="contained"
         onPress={() => console.log('Pressed')}
-        style={[styles.button, { borderRadius: 4 }]} // Set borderRadius to 0
+        style={[styles.button, { borderRadius: 4 }]}
         labelStyle={styles.label}
         contentStyle={styles.content}
     >
