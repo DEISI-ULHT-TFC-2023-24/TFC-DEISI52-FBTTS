@@ -18,6 +18,7 @@ const MainNavigator = () => {
             drawerContent={(props) => <CustomDrawerContent navigation={navigation} {...props} />}
             screenOptions={{
                 headerShown: false,
+                animationEnabled: false
             }}
         >
             <Drawer.Screen name="DashboardStack" component={DashboardStack} options={{ title: 'Dashboard' }} />

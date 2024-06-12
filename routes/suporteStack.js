@@ -31,7 +31,7 @@ const SuporteStack = ({ navigation }) => {
                             </View>
                         )}
                         color="#000"
-                        onPress={() => {}}
+                        onPress={() => navigation.navigate('Perfil')}
                     />
 
                 ),

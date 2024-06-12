@@ -1,24 +1,35 @@
+// src/navigations/AuthNavigator.js
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import SplashScreen from '../screens/SplashScreen';
 import Login from '../screens/Login';
 import CustomDrawerContent from './CustomDrawerContent';
 import DashboardStack from './dashboardStack';
 import LigasStack from "./ligasStack";
 import SuporteStack from "./suporteStack";
 import JogosDasLigasStack from "./jogosDasLigasStack";
+import {createDrawerNavigator} from "@react-navigation/drawer";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+            initialRouteName="Splash"
+            screenOptions={{
+                headerShown: false,
+                animationEnabled: false
+            }}
+        >
+            <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Dashboard" component={DashboardDrawer} options={{ title: 'Dashboard' }} />
         </Stack.Navigator>
     );
 };
+
+export default AuthNavigator;
 
 const DashboardDrawer = ({ route }) => {
     return (
@@ -42,5 +53,3 @@ const DashboardDrawer = ({ route }) => {
         </Drawer.Navigator>
     );
 };
-
-export default AuthNavigator;
