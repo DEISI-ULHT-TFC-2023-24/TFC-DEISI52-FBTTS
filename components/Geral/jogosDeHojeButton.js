@@ -46,6 +46,7 @@ const JogosDeHojeButton = () => {
 const styles = StyleSheet.create({
     button: {
         bottom: 10,
+        borderRadius: 4,
         backgroundColor: '#19D895',
     },
     label: {

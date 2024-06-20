@@ -1,34 +1,39 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-paper';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-// Componente customizado para adicionar um bullet antes do texto
 const DrawerItemWithBullet = ({ label, onPress, labelStyle }) => {
     return (
-        <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
-            <View style={styles.bullet} />
-            <Text style={[styles.drawerItemText, labelStyle]}>{label}</Text>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
+            <View style={styles.bulletContainer}>
+                <View style={styles.bullet} />
+            </View>
+            <Text style={[styles.label, labelStyle]}>{label}</Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
-    itemContainer: {
+    container: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 30,
+        marginLeft: '15%',
     },
-    bullet: {
-        width: 6,
-        height: 6,
-        borderRadius: 3,
-        backgroundColor: '#ffffff',
+    bulletContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
         marginRight: 10,
     },
-    drawerItemText: {
-        color: '#ffffff',
+    bullet: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: '#fff',
+    },
+    label: {
         fontSize: 16,
+        color: '#fff',
     },
 });
 

@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Dimensions, Image, Linking } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
-import CustomDrawerHeader from "./CustomDrawerHeader";
-import DrawerItemWithBullet from "./DrawerItemWithBullet";
-import {AuthContext} from "../context/AuthContext";
+import CustomDrawerHeader from './CustomDrawerHeader';
+import DrawerItemWithBullet from './DrawerItemWithBullet';
+import { AuthContext } from '../context/AuthContext';
 
 const CustomDrawerContent = ({ navigation, email }) => {
-    const {logout} = useContext(AuthContext)
+    const { logout } = useContext(AuthContext);
 
     const handleOpenWebsite = () => {
         Linking.openURL('https://www.fbtts.pt');
@@ -31,7 +31,7 @@ const CustomDrawerContent = ({ navigation, email }) => {
                     <DrawerItemWithBullet label="Suporte" onPress={() => navigation.navigate('SuporteStack')} labelStyle={styles.drawerItemText} />
                     <DrawerItemWithBullet label="Jogos" onPress={() => navigation.navigate('JogosStack')} labelStyle={styles.drawerItemText} />
                     <DrawerItemWithBullet label="Ajuda" onPress={handleOpenWebsite} labelStyle={styles.drawerItemText} />
-                    <DrawerItemWithBullet label="Logout" onPress={() => {logout()}} labelStyle={styles.drawerItemText} />
+                    <DrawerItemWithBullet label="Logout" onPress={() => { logout() }} labelStyle={styles.drawerItemText} />
                     <View style={styles.filler} />
                 </View>
             </DrawerContentScrollView>
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 16,
         fontWeight: 'bold',
-        paddingHorizontal: 30,
     },
     filler: {
         flex: 1,

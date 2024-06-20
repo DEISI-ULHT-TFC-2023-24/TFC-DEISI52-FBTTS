@@ -64,7 +64,7 @@ const DashboardStack = ({navigation}) => {
             <Stack.Screen
                 name="Perfil"
                 component={ProfileScreen}
-                options={{title: 'Profile'}}
+                options={{title: 'Perfil'}}
             />
         </Stack.Navigator>
     );

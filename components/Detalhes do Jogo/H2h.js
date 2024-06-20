@@ -5,11 +5,21 @@ import oviedoData from '../../JSON/match.json';
 const ConfrontosDiretos = () => {
     const { h2h } = oviedoData;
 
-    const renderConfrontoItem = ({ item }) => (
-        <View style={styles.confrontoItem}>
-            <Text>{`${item.home} ${item.ft} ${item.away}`}</Text>
-        </View>
-    );
+    const renderConfrontoItem = ({ item }) => {
+        const [homeGoals, awayGoals] = item.ft.split('-').map(Number);
+
+        return (
+            <View style={styles.confrontoItem}>
+                <Text style={[styles.equipaCasa, homeGoals > awayGoals && styles.bold]}>
+                    {item.home}
+                </Text>
+                <Text style={styles.resultado}>{item.ft}</Text>
+                <Text style={[styles.equipaVisitante, awayGoals > homeGoals && styles.bold]}>
+                    {item.away}
+                </Text>
+            </View>
+        );
+    };
 
     return (
         <View style={styles.container}>
@@ -34,13 +44,34 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     title: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 8,
+        marginBottom: 16,
     },
     confrontoItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 8,
-        alignItems: "center"
+    },
+    equipaCasa: {
+        flex: 1,
+        textAlign: 'left',
+        fontSize: 16, // Aumentar o tamanho do texto
+    },
+    resultado: {
+        flex: 1,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 16, // Aumentar o tamanho do texto
+    },
+    equipaVisitante: {
+        flex: 1,
+        textAlign: 'right',
+        fontSize: 16, // Aumentar o tamanho do texto
+    },
+    bold: {
+        fontWeight: 'bold',
     },
 });
 

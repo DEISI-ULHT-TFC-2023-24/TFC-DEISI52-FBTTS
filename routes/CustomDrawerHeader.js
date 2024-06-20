@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center', // Center the content horizontally
         paddingVertical: 20,
         paddingHorizontal: 30,
     },
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     },
     userInfo: {
         flexDirection: 'column',
+        alignItems: 'center', // Center the user info vertically
     },
     username: {
         fontSize: 16,

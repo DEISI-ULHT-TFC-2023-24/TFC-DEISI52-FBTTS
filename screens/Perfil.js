@@ -1,17 +1,24 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { AuthContext } from "../context/AuthContext";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ProfileScreen = () => {
     const { userInfo } = useContext(AuthContext);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Profile</Text>
+            <Text style={styles.title}>Perfil</Text>
             <View style={styles.section}>
-                <Text style={styles.label}>Nome do Utilizador: {userInfo.username}</Text>
+                <Text style={styles.label}>Utilizador: {userInfo.username}</Text>
                 <Text style={styles.label}>E-mail: {userInfo.email}</Text>
             </View>
+            <LinearGradient
+                colors={['#6dce83', '#0373cc']}
+                style={styles.separator}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+            />
             <View style={styles.section}>
                 <Text style={styles.title}>Preferências</Text>
                 <View style={styles.preferenceItem}>
@@ -37,22 +44,22 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 24,
+        color: '#000000',
+        fontSize: 28,
         fontWeight: 'bold',
-        color: '#0373cc',
-        marginBottom: 20,
+        marginBottom: 15,
     },
     section: {
         width: '100%',
         marginBottom: 30,
     },
     label: {
-        fontSize: 18,
+        fontSize: 20,
         marginBottom: 10,
     },
     preferencesTitle: {
-        color: '#0373cc',
-        fontSize: 22,
+        color: '#000000',
+        fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 15,
     },
@@ -72,6 +79,11 @@ const styles = StyleSheet.create({
     },
     currency: {
         fontSize: 18,
+    },
+    separator: {
+        height: 2,
+        width: '100%',
+        marginBottom: 30,
     },
 });
 

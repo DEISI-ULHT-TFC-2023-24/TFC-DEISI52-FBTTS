@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import oviedoData from '../../JSON/match.json';
 
 const EstatisticasGolosListaJogos = () => {
@@ -61,11 +62,21 @@ const EstatisticasGolosListaJogos = () => {
     const goalsData = showHomeStats ? oviedoData.homeGoals : oviedoData.awayGoals;
     const teamName = showHomeStats ? oviedoData.home.name : oviedoData.away.name;
 
-    const renderJogoItem = ({ item }) => (
-        <View style={styles.jogoItem}>
-            <Text style={styles.jogoText}>{`${item.home} ${item.ft} ${item.away}`}</Text>
-        </View>
-    );
+    const renderJogoItem = ({ item }) => {
+        const [homeGoals, awayGoals] = item.ft.split('-').map(Number);
+
+        return (
+            <View style={styles.jogoItem}>
+                <Text style={[styles.equipaCasa, homeGoals > awayGoals && styles.bold]}>
+                    {item.home}
+                </Text>
+                <Text style={styles.resultado}>{item.ft}</Text>
+                <Text style={[styles.equipaVisitante, awayGoals > homeGoals && styles.bold]}>
+                    {item.away}
+                </Text>
+            </View>
+        );
+    };
 
     let jogosFiltrados = verUltimosJogos
         ? showHomeStats
@@ -75,6 +86,15 @@ const EstatisticasGolosListaJogos = () => {
             ? oviedoData.homeResults
             : oviedoData.awayResults;
 
+    const renderSeparator = () => (
+        <LinearGradient
+            colors={['#6dce83', '#0373cc']}
+            style={styles.separator}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+        />
+    );
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{`Últimos Jogos do ${teamName}`}</Text>
@@ -83,13 +103,13 @@ const EstatisticasGolosListaJogos = () => {
                     style={[styles.button, verUltimosJogos ? styles.selectedButton : null]}
                     onPress={handleVerUltimosJogos}
                 >
-                    <Text style={styles.buttonText}>Casa</Text>
+                    <Text style={styles.casaButton}>Casa</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, !verUltimosJogos ? styles.selectedButton : null]}
                     onPress={handleVerJogosCasaFora}
                 >
-                    <Text style={styles.buttonText}>Visitante</Text>
+                    <Text style={styles.visitanteButton}>Visitante</Text>
                 </TouchableOpacity>
             </View>
             <FlatList
@@ -98,6 +118,7 @@ const EstatisticasGolosListaJogos = () => {
                 renderItem={renderJogoItem}
                 ListEmptyComponent={<Text>Nenhum jogo disponível.</Text>}
             />
+            <View style={styles.separatorSpace} />
             <Text style={styles.title}>Estatísticas de Golos</Text>
             <View style={styles.table}>
                 <View style={styles.row}>
@@ -107,11 +128,14 @@ const EstatisticasGolosListaJogos = () => {
                     <Text style={[styles.cell, styles.headerCell]}>Global</Text>
                 </View>
                 {Object.entries(selectedStats).map(([key, keys]) => (
-                    <View key={key} style={styles.row}>
-                        <Text style={styles.cell}>{key}</Text>
-                        <Text style={styles.cell}>{goalsData[keys.Home]}%</Text>
-                        <Text style={styles.cell}>{goalsData[keys.Away]}%</Text>
-                        <Text style={styles.cell}>{goalsData[keys.Global]}%</Text>
+                    <View key={key}>
+                        <View style={styles.row}>
+                            <Text style={styles.cell}>{key}</Text>
+                            <Text style={styles.cell}>{goalsData[keys.Home]}%</Text>
+                            <Text style={styles.cell}>{goalsData[keys.Away]}%</Text>
+                            <Text style={styles.cell}>{goalsData[keys.Global]}%</Text>
+                        </View>
+                        {renderSeparator()}
                     </View>
                 ))}
             </View>
@@ -143,8 +167,6 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderBottomWidth: 1,
-        borderBottomColor: '#fff',
         paddingVertical: 10,
     },
     cell: {
@@ -164,29 +186,60 @@ const styles = StyleSheet.create({
     toggleButtonText: {
         fontSize: 16,
     },
+    casaButton: {
+        backgroundColor: '#2196f3',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 8,
+        color: '#fff',
+    },
+    visitanteButton: {
+        backgroundColor: '#ff6258',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 8,
+        color: '#fff',
+    },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginBottom: 16,
     },
-    button: {
-        backgroundColor: '#2196f3',
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        borderRadius: 8,
-    },
     buttonText: {
         textAlign: 'center',
         color: 'white',
     },
-    selectedButton: {
-        backgroundColor: '#2196f3',
-    },
     jogoItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 8,
     },
-    jogoText: {
+    equipaCasa: {
+        flex: 1,
+        textAlign: 'left',
+        fontSize: 16,
+    },
+    resultado: {
+        flex: 1,
         textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    equipaVisitante: {
+        flex: 1,
+        textAlign: 'right',
+        fontSize: 16,
+    },
+    bold: {
+        fontWeight: 'bold',
+    },
+    separator: {
+        height: 2,
+        width: '100%',
+    },
+    separatorSpace: {
+        height: 20,
     },
 });
 

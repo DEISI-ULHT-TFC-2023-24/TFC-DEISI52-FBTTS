@@ -127,7 +127,7 @@
         },
         "Red Cards": {
             "type": "Red Cards",
-            "value": null
+            "value": "0"
         },
         "Goalkeeper Saves": {
             "type": "Goalkeeper Saves",
@@ -149,7 +149,7 @@
         },
         "Offsides": {
             "type": "Offsides",
-            "value": null
+            "value": "0"
         },
         "Blocked Shots": {
             "type": "Blocked Shots",

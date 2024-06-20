@@ -69,68 +69,64 @@
     }
   ],
   "homeStats": {
-    "Total passes": {
-      "type": "Total passes",
+    "Passes totais": {
+      "type": "Passes totais",
       "value": "541"
     },
-    "Shots outsidebox": {
-      "type": "Shots outsidebox",
+    "Remates Fora da Área": {
+      "type": "Remates Fora da Área",
       "value": "2"
     },
     "Offsides": {
-      "type": "Offsides",
+      "type": "Foras de Jogo",
       "value": "1"
     },
     "Blocked Shots": {
-      "type": "Blocked Shots",
+      "type": "Remates Bloqueados",
       "value": "1"
     },
     "Ball Possession": {
-      "type": "Ball Possession",
+      "type": "Posse de Bola",
       "value": "65%"
     },
     "Shots on Goal": {
-      "type": "Shots on Goal",
+      "type": "Remates Enquadrados",
       "value": "3"
     },
     "Total Shots": {
-      "type": "Total Shots",
+      "type": "Remates Totais",
       "value": "9"
     },
     "Shots off Goal": {
-      "type": "Shots off Goal",
+      "type": "Remates Desenquadrados",
       "value": "5"
     },
     "Corner Kicks": {
-      "type": "Corner Kicks",
+      "type": "Cantos",
       "value": "6"
     },
     "Yellow Cards": {
-      "type": "Yellow Cards",
+      "type": "Cartões Amarelos",
       "value": "1"
     },
     "Passes accurate": {
-      "type": "Passes accurate",
+      "type": "Passes Completos",
       "value": "465"
     },
-    "expected_goals": {
-      "type": "expected_goals",
-      "value": null
-    },
     "Shots insidebox": {
-      "type": "Shots insidebox",
+      "type": "Remates Dentro de Área",
       "value": "7"
     },
     "Fouls": {
-      "type": "Fouls",
+      "type": "Faltas Cometidas",
       "value": "10"
     },
     "Red Cards": {
-      "type": "Red Cards",
-      "value": null
+      "type": "Cartões Vermelhos",
+      "value": 0
     },
     "Goalkeeper Saves": {
-      "type": "Goalkeeper Saves",
+      "type": "Defesas",
       "value": "2"
     },
     "Passes %": {
@@ -139,20 +135,20 @@
     }
   },
   "awayStats": {
-    "Total passes": {
-      "type": "Total passes",
+    "Passes totais": {
+      "type": "Passes totais",
       "value": "299"
     },
-    "Shots outsidebox": {
-      "type": "Shots outsidebox",
+    "Remates Fora da Área": {
+      "type": "Remates Fora da Área",
       "value": "9"
     },
     "Offsides": {
-      "type": "Offsides",
-      "value": null
+      "type": "Foras de Jogo",
+      "value": 0
     },
     "Blocked Shots": {
-      "type": "Blocked Shots",
+      "type": "Remates Bloqueados",
       "value": "5"
     },
     "Ball Possession": {
