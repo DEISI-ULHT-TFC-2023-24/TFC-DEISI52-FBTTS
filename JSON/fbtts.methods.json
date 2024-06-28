@@ -1,0 +1,84 @@
+[{
+  "_id": {
+    "$oid": "6626763cf3c53a800b984fd9"
+  },
+  "id": 408,
+  "title": "Over 2.5",
+  "method": "home.superfavorite and home.over05fh > 40",
+  "leagues": [
+    16,
+    17
+  ],
+  "market": "Goals Over/Under",
+  "operator": "over",
+  "value": "2.5",
+  "total": 0,
+  "wins": 0,
+  "odd": 0,
+  "profit": 0,
+  "user": "duartenneves@gmail.com",
+  "dateCreate": "2023-09-06",
+  "dateUpdate": "2023-09-06",
+  "isLive": false
+},
+{
+  "_id": {
+    "$oid": "6626763cf3c53a800b984fda"
+  },
+  "id": 407,
+  "title": "Portugal 1ª Liga Match Winner Home",
+  "method": "h2h.wins > 60 and home.wins > away.wins and h2h.year = 2017",
+  "leagues": [
+    31
+  ],
+  "market": "Match Winner",
+  "operator": "",
+  "value": "home",
+  "total": 0,
+  "wins": 0,
+  "odd": 0,
+  "profit": 0,
+  "hasMatchesNext": false,
+  "user": "duartenneves@gmail.com",
+  "dateCreate": "2023-09-06",
+  "dateUpdate": "2023-09-06",
+  "views": 0,
+  "public": false,
+  "live": false,
+  "favorite": false,
+  "isPublic": false,
+  "isLive": false,
+  "isFavorite": false
+},
+{
+  "_id": {
+    "$oid": "6626763cf3c53a800b984fdb"
+  },
+  "id": 409,
+  "title": "Under 1.5 60 min live",
+  "method": "match.nogoalht and match.nogoal4660",
+  "leagues": [
+    17,
+    22,
+    24,
+    31
+  ],
+  "market": "Goals Over/Under",
+  "operator": "under",
+  "value": "1.5",
+  "total": 0,
+  "wins": 0,
+  "odd": 0,
+  "profit": 0,
+  "hasMatchesNext": false,
+  "user": "duartenneves@gmail.com",
+  "dateCreate": "2023-09-06",
+  "dateUpdate": "2023-09-06",
+  "views": 0,
+  "public": false,
+  "live": true,
+  "favorite": false,
+  "isPublic": false,
+  "isLive": true,
+  "isFavorite": false
+}]
